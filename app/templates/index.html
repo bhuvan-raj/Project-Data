@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; color: #0056b3; }
+        form { display: flex; margin-bottom: 20px; }
+        input[type="text"] { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px 0 0 4px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        ul { list-style: none; padding: 0; }
+        li { background: #e9ecef; padding: 10px; margin-bottom: 8px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .timestamp { font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Simple To-Do List</h1>
+
+        <form method="post" action="/">
+            <input type="text" name="task" placeholder="Add a new To-Do item..." required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <h2>Current Tasks</h2>
+        {% if todos %}
+            <ul>
+                {% for todo in todos %}
+                    <li>
+                        <span>{{ todo[1] }}</span>
+                        <span class="timestamp">{{ todo[2].strftime('%Y-%m-%d %H:%M') }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="text-align: center;">No tasks yet! Add one above.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
